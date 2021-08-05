@@ -226,8 +226,7 @@ namespace TodoListClient
                    MessageBox.Show("Unexpected error: " + message);
                });
 
-
-                return;
+               return;
             }
 
             //
