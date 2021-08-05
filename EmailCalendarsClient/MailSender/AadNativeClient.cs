@@ -1,11 +1,13 @@
 ﻿
 
+using Microsoft.Graph;
 using Microsoft.Identity.Client;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using TodoListClient;
 
@@ -51,7 +53,7 @@ namespace EmailCalendarsClient.MailSender
                 var builder = _app.AcquireTokenInteractive(Scopes)
                     .WithAccount(accounts.FirstOrDefault())
                     .WithUseEmbeddedWebView(false)
-                    .WithPrompt(Prompt.SelectAccount);
+                    .WithPrompt(Microsoft.Identity.Client.Prompt.SelectAccount);
 
                 var result = await builder.ExecuteAsync().ConfigureAwait(false);
 
@@ -85,6 +87,60 @@ namespace EmailCalendarsClient.MailSender
                 await _app.RemoveAsync(accounts.First());
                 accounts = await GetAccountsAsync();
             }
+        }
+
+        public async Task SendMailAsync()
+        {
+            var result = await AcquireTokenSilent();
+
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", result.AccessToken);
+            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            GraphServiceClient graphClient = new GraphServiceClient(_httpClient)
+            {
+                AuthenticationProvider = new DelegateAuthenticationProvider(async (requestMessage) =>
+                {
+                    requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", result.AccessToken);
+                })
+            };
+
+
+            var message = new Message
+            {
+                Subject = "Meet for lunch?",
+                Body = new ItemBody
+                {
+                    ContentType = BodyType.Text,
+                    Content = "The new cafeteria is open."
+                },
+                ToRecipients = new List<Recipient>()
+                {
+                    new Recipient
+                    {
+                        EmailAddress = new EmailAddress
+                        {
+                            Address = "damien_bod@hotmail.com"
+                        }
+                    }
+                },
+                CcRecipients = new List<Recipient>()
+                {
+                    new Recipient
+                    {
+                        EmailAddress = new EmailAddress
+                        {
+                            Address = "danas@contoso.onmicrosoft.com"
+                        }
+                    }
+                }
+            };
+
+            var saveToSentItems = true;
+
+            await graphClient.Me
+                .SendMail(message, saveToSentItems)
+                .Request()
+                .PostAsync();
         }
 
     }

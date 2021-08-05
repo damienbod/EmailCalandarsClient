@@ -48,7 +48,7 @@
                             </Style>
                         </TextBox.Style>
                     </TextBox>
-                    <Button Grid.Column="1" Content="Add item" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Width="101" RenderTransformOrigin="-0.013,0.15" Click="AddTodoItem" Height="34" IsDefault="True" TabIndex="2"/>
+                    <Button Grid.Column="1" Content="Send Email" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Width="101" RenderTransformOrigin="-0.013,0.15" Click="SendEmail" Height="34" IsDefault="True" TabIndex="2"/>
                 </Grid>
 
             </GroupBox>
