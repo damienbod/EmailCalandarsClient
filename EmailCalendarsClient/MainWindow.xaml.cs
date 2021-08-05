@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using EmailCalendarsClient.MailSender;
 using Microsoft.Identity.Client;
 using Newtonsoft.Json;
 using System.Collections.Generic;
@@ -24,19 +25,7 @@ namespace TodoListClient
     /// </summary>
     public partial class MainWindow : Window
     {
-        private static readonly string AadInstance = ConfigurationManager.AppSettings["ida:AADInstance"];
-        private static readonly string Tenant = ConfigurationManager.AppSettings["ida:Tenant"];
-        private static readonly string ClientId = ConfigurationManager.AppSettings["ida:ClientId"];
-
-        private static readonly string Authority = string.Format(CultureInfo.InvariantCulture, AadInstance, Tenant);
-
-        private static readonly string Scope = ConfigurationManager.AppSettings["todo:Scope"];
-        private static readonly string[] Scopes = { Scope };
-
-
-        private readonly HttpClient _httpClient = new HttpClient();
-        private readonly IPublicClientApplication _app;
-
+        AadNativeClient _aadNativeClient = new AadNativeClient();
         // Button content
         const string SignInString = "Sign In";
         const string ClearCacheString = "Clear Cache";
@@ -44,13 +33,60 @@ namespace TodoListClient
         public MainWindow()
         {
             InitializeComponent();
-            _app = PublicClientApplicationBuilder.Create(ClientId)
-                .WithAuthority(Authority)
-                .WithRedirectUri("http://localhost:65419") // needed only for the system browser
-                .Build();
-
-            TokenCacheHelper.EnableSerialization(_app.UserTokenCache);
+            _aadNativeClient.InitClient();
             GetGraphData();
+        }
+
+        private async void SignIn(object sender = null, RoutedEventArgs args = null)
+        {
+            var accounts = await _aadNativeClient.GetAccountsAsync();
+
+            // If there is already a token in the cache, clear the cache and update the label on the button.
+            if (SignInButton.Content.ToString() == ClearCacheString)
+            {
+                TodoList.ItemsSource = string.Empty;
+
+                await _aadNativeClient.RemoveAccountsAsync();
+
+                SignInButton.Content = SignInString;
+                UserName.Content = Properties.Resources.UserNotSignedIn;
+                return;
+            }
+
+            try
+            {
+                var account = await _aadNativeClient.SignIn();
+
+                Dispatcher.Invoke(() =>
+                {
+                    SignInButton.Content = ClearCacheString;
+                    SetUserName(account);
+                    GetGraphData();
+                });
+            }
+            catch (MsalException ex)
+            {
+                if (ex.ErrorCode == "access_denied")
+                {
+                    // The user canceled sign in, take no action.
+                }
+                else
+                {
+                    // An unexpected error occurred.
+                    string message = ex.Message;
+                    if (ex.InnerException != null)
+                    {
+                        message += "Error Code: " + ex.ErrorCode + "Inner Exception : " + ex.InnerException.Message;
+                    }
+
+                    MessageBox.Show(message);
+                }
+
+                Dispatcher.Invoke(() =>
+                {
+                    UserName.Content = Properties.Resources.UserNotSignedIn;
+                });
+            }
         }
 
         private void GetGraphData()
@@ -60,7 +96,7 @@ namespace TodoListClient
 
         private async Task GetGraphDataAsync(bool isAppStarting)
         {
-            var accounts = (await _app.GetAccountsAsync()).ToList();
+            var accounts = await _aadNativeClient.GetAccountsAsync();
             if (!accounts.Any())
             {
                 SignInButton.Content = SignInString;
@@ -71,9 +107,7 @@ namespace TodoListClient
             AuthenticationResult result = null;
             try
             {
-                result = await _app.AcquireTokenSilent(Scopes, accounts.FirstOrDefault())
-                    .ExecuteAsync()
-                    .ConfigureAwait(false);
+                result = await _aadNativeClient.AcquireTokenSilent();
 
                 Dispatcher.Invoke(
                     () =>
@@ -106,7 +140,7 @@ namespace TodoListClient
             }
 
             // Once the token has been returned by MSAL, add it to the http authorization header, before making the call to access the To Do list service.
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", result.AccessToken);
+            //_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", result.AccessToken);
 
             // Call the To Do list service.
             //HttpResponseMessage response = await _httpClient.GetAsync(TodoListApiAddress);
@@ -146,7 +180,7 @@ namespace TodoListClient
 
         private async void AddTodoItem(object sender, RoutedEventArgs e)
         {
-            var accounts = (await _app.GetAccountsAsync()).ToList();
+            var accounts = await _aadNativeClient.GetAccountsAsync();
 
             if (!accounts.Any())
             {
@@ -163,9 +197,7 @@ namespace TodoListClient
             AuthenticationResult result = null;
             try
             {
-                result = await _app.AcquireTokenSilent(Scopes, accounts.FirstOrDefault())
-                    .ExecuteAsync()
-                    .ConfigureAwait(false);
+                result = await _aadNativeClient.AcquireTokenSilent();
 
                 Dispatcher.Invoke(() =>
                 {
@@ -203,7 +235,7 @@ namespace TodoListClient
             //
 
             // Once the token has been returned by MSAL, add it to the http authorization header, before making the call to access the To Do service.
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", result.AccessToken);
+            //_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", result.AccessToken);
 
             // Forms encode Todo item, to POST to the todo list web api.
             //TodoItem todoItem = new TodoItem() { Title = TodoText.Text };
@@ -223,98 +255,6 @@ namespace TodoListClient
             //{
             //        await DisplayErrorMessage(response);
             //}
-        }
-
-        private async void SignIn(object sender = null, RoutedEventArgs args = null)
-        {
-            var accounts = (await _app.GetAccountsAsync()).ToList();
-
-            // If there is already a token in the cache, clear the cache and update the label on the button.
-            if (SignInButton.Content.ToString() == ClearCacheString)
-            {
-                TodoList.ItemsSource = string.Empty;
-
-                // Clears the library cache. Does not affect the browser cookies.
-                while (accounts.Any())
-                {
-                    await _app.RemoveAsync(accounts.First());
-                    accounts = (await _app.GetAccountsAsync()).ToList();
-                }
-
-                SignInButton.Content = SignInString;
-                UserName.Content = Properties.Resources.UserNotSignedIn;
-                return;
-            }
-
-            // Get an access token to call the To Do list service.
-            try
-            {
-                var result = await _app.AcquireTokenSilent(Scopes, accounts.FirstOrDefault())
-                    .ExecuteAsync()
-                    .ConfigureAwait(false);
-
-                Dispatcher.Invoke(() =>
-                {
-                    SignInButton.Content = ClearCacheString;
-                    SetUserName(result.Account);
-                    GetGraphData();
-                }
-                );
-            }
-            catch (MsalUiRequiredException)
-            {
-            try
-            {
-     
-                    // Force a sign-in (Prompt.SelectAccount), as the MSAL web browser might contain cookies for the current user
-                    // and we don't necessarily want to re-sign-in the same user
-                    var builder = _app.AcquireTokenInteractive(Scopes)
-                        .WithAccount(accounts.FirstOrDefault())
-                        .WithUseEmbeddedWebView(false)
-                        .WithPrompt(Prompt.SelectAccount);
-
-                    if (!_app.IsEmbeddedWebViewAvailable())
-                    {
-                        // You app should install the embedded browser WebView2 https://aka.ms/msal-net-webview2
-                        // but if for some reason this is not possible, you can fall back to the system browser 
-                        // in this case, the redirect uri needs to be set to "http://localhost:65419"
-                        builder = builder.WithUseEmbeddedWebView(false);
-                    }
-
-                    var result = await builder.ExecuteAsync().ConfigureAwait(false);
-
-                    Dispatcher.Invoke(() =>
-                    {
-                        SignInButton.Content = ClearCacheString;
-                        SetUserName(result.Account);
-                        GetGraphData();
-                    }
-                    );
-                }
-                catch (MsalException ex)
-                {
-                    if (ex.ErrorCode == "access_denied")
-                    {
-                        // The user canceled sign in, take no action.
-                    }
-                    else
-                    {
-                        // An unexpected error occurred.
-                        string message = ex.Message;
-                        if (ex.InnerException != null)
-                        {
-                            message += "Error Code: " + ex.ErrorCode + "Inner Exception : " + ex.InnerException.Message;
-                        }
-
-                    MessageBox.Show(message);
-                }
-
-                    Dispatcher.Invoke(() =>
-                    {
-                        UserName.Content = Properties.Resources.UserNotSignedIn;
-                    });
-                }
-            }
         }
 
         // Set user name to text box
