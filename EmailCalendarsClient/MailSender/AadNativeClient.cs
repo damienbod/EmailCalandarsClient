@@ -18,13 +18,12 @@ namespace EmailCalendarsClient.MailSender
         private readonly HttpClient _httpClient = new HttpClient();
         private IPublicClientApplication _app;
 
-        private static readonly string AadInstance = ConfigurationManager.AppSettings["ida:AADInstance"];
-        private static readonly string Tenant = ConfigurationManager.AppSettings["ida:Tenant"];
-        private static readonly string ClientId = ConfigurationManager.AppSettings["ida:ClientId"];
+        private static readonly string AadInstance = ConfigurationManager.AppSettings["AADInstance"];
+        private static readonly string Tenant = ConfigurationManager.AppSettings["Tenant"];
+        private static readonly string ClientId = ConfigurationManager.AppSettings["ClientId"];
+        private static readonly string Scope = ConfigurationManager.AppSettings["Scope"];
 
         private static readonly string Authority = string.Format(CultureInfo.InvariantCulture, AadInstance, Tenant);
-
-        private static readonly string Scope = ConfigurationManager.AppSettings["todo:Scope"];
         private static readonly string[] Scopes = { Scope };
 
         public void InitClient()
