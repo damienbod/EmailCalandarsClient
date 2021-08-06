@@ -4,7 +4,7 @@
 
 ## Requirements
 
- email.
+To send emails using Microsoft Graph API, you need to have an office license for the identity which sends the email.
 
 You can sign-in here to check this:
 
@@ -12,7 +12,7 @@ https://www.office.com
 
 ## Setup Azure App registration
 
-To send emails using Microsoft Graph API, you need to have an office license for the identity which sends the email.
+The Azure App registration requires the Graph API delegated **Mail.Send** and the **Mail.ReadWrite** scopes.
 
 ## Nuget packages
 
