@@ -11,7 +11,7 @@
                 </VisualBrush.Transform>
                 <VisualBrush.Visual>
                     <Grid>
-                        <TextBlock Text="Enter to do item" FontWeight="Normal" Foreground="Gray"
+                        <TextBlock Text="Enter email" FontWeight="Normal" Foreground="Gray"
                          FontSize="12" TextAlignment="Justify"/>
                     </Grid>
                 </VisualBrush.Visual>
