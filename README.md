@@ -5,6 +5,13 @@
 
 ## Nuget packages
 
+```xml
+<ItemGroup>
+	<PackageReference Include="Microsoft.Identity.Client" Version="4.35.1" />
+	<PackageReference Include="Microsoft.Identity.Web.MicrosoftGraphBeta" Version="1.15.2" />
+	<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+</ItemGroup>
+```
 
 ## Links
 
