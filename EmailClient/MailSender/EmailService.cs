@@ -5,7 +5,7 @@ using System.IO;
 
 namespace EmailCalendarsClient.MailSender
 {
-    class EmailService
+    public class EmailService
     {
         MessageAttachmentsCollectionPage MessageAttachmentsCollectionPage = new MessageAttachmentsCollectionPage();
 
