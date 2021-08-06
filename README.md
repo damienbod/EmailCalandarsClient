@@ -1,5 +1,7 @@
 # Graph API Email client
 
+[![.NET Core Desktop](https://github.com/damienbod/EmailCalandarsClient/actions/workflows/dotnet-desktop.yml/badge.svg)](https://github.com/damienbod/EmailCalandarsClient/actions/workflows/dotnet-desktop.yml)
+
 ## Setup Azure App registration
 
 
