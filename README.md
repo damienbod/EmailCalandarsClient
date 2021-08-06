@@ -23,6 +23,8 @@ https://stackoverflow.com/questions/56110910/sending-email-with-microsoft-graph-
 
 https://docs.microsoft.com/en-us/graph/sdks/choose-authentication-providers?tabs=CS#InteractiveProvider
 
+https://converter.telerik.com/
+
 
 ## More information
 For more information see MSAL.NET's conceptual documentation:
