@@ -73,8 +73,8 @@
                         </TextBox.Style>
                     </TextBox>
                     <Button Grid.Column="1" Content="Send Html Email" HorizontalAlignment="Left" Margin="66,10,0,0" VerticalAlignment="Top" Width="136" RenderTransformOrigin="-0.013,0.15" Click="SendEmail" Height="34" IsDefault="True" TabIndex="2" Background="#FFDDDDDD"/>
-                    <Button Grid.Column="2" Content="Send Text Email" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Width="136" RenderTransformOrigin="-0.013,0.15" Click="AddAttachment" Height="34" IsDefault="True" TabIndex="2" Background="#FFDDDDDD"/>
-                    <Button Grid.Column="3" Content="Add Attachment" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Width="136" RenderTransformOrigin="-0.013,0.15" Click="SendHtmlEmail" Height="34" IsDefault="True" TabIndex="2" Background="#FFDDDDDD"/>
+                    <Button Grid.Column="2" Content="Send Text Email" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Width="136" RenderTransformOrigin="-0.013,0.15" Click="SendHtmlEmail" Height="34" IsDefault="True" TabIndex="2" Background="#FFDDDDDD"/>
+                    <Button Grid.Column="3" Content="Add Attachment" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Width="136" RenderTransformOrigin="-0.013,0.15" Click="AddAttachment" Height="34" IsDefault="True" TabIndex="2" Background="#FFDDDDDD"/>
 
                     <TextBox Grid.Column="0"  HorizontalAlignment="Left" Height="41" 
                         FontSize="12" TextWrapping="Wrap" VerticalAlignment="Top" Width="713" 
