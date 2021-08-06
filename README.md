@@ -2,6 +2,9 @@
 
 ## Setup Azure App registration
 
+## Nuget packages
+
+
 ## Links
 
 https://docs.microsoft.com/en-us/graph/outlook-send-mail-from-other-user
