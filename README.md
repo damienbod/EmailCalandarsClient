@@ -2,8 +2,13 @@
 
 [![.NET Core Desktop](https://github.com/damienbod/EmailCalandarsClient/actions/workflows/dotnet-desktop.yml/badge.svg)](https://github.com/damienbod/EmailCalandarsClient/actions/workflows/dotnet-desktop.yml)
 
+## Requirements
+
+To send emails using Microsoft Graph API, you need to have an Office 365 licence for the identity which sends the email.
+
 ## Setup Azure App registration
 
+The Azure App registration requires the Graph API delegated **Mail.Send** and the **Mail.ReadWrite** scopes. 
 
 ## Nuget packages
 
