@@ -9,24 +9,25 @@ namespace GraphEmailClient
 {
     public partial class MainWindow : Window
     {
-        AadNativeClient _aadNativeClient = new AadNativeClient();
+        AadGraphApiDelegatedClient _aadGraphApiDelegatedClient = new AadGraphApiDelegatedClient();
         EmailService _emailService = new EmailService();
+
         const string SignInString = "Sign In";
         const string ClearCacheString = "Clear Cache";
 
         public MainWindow()
         {
             InitializeComponent();
-            _aadNativeClient.InitClient();
+            _aadGraphApiDelegatedClient.InitClient();
         }
 
         private async void SignIn(object sender = null, RoutedEventArgs args = null)
         {
-            var accounts = await _aadNativeClient.GetAccountsAsync();
+            var accounts = await _aadGraphApiDelegatedClient.GetAccountsAsync();
 
             if (SignInButton.Content.ToString() == ClearCacheString)
             {
-                await _aadNativeClient.RemoveAccountsAsync();
+                await _aadGraphApiDelegatedClient.RemoveAccountsAsync();
 
                 SignInButton.Content = SignInString;
                 UserName.Content = "Not signed in";
@@ -35,7 +36,7 @@ namespace GraphEmailClient
 
             try
             {
-                var account = await _aadNativeClient.SignIn();
+                var account = await _aadGraphApiDelegatedClient.SignIn();
 
                 Dispatcher.Invoke(() =>
                 {
@@ -73,7 +74,7 @@ namespace GraphEmailClient
             var message = _emailService.CreateStandardEmail(EmailRecipientText.Text, 
                 EmailHeader.Text, EmailBody.Text);
 
-            await _aadNativeClient.SendEMailAsync(message);
+            await _aadGraphApiDelegatedClient.SendEmailAsync(message);
             _emailService.ClearAttachments();
         }
 
@@ -82,7 +83,7 @@ namespace GraphEmailClient
             var messageHtml = _emailService.CreateHtmlEmail(EmailRecipientText.Text,
                 EmailHeader.Text, EmailBody.Text);
 
-            await _aadNativeClient.SendEMailAsync(messageHtml);
+            await _aadGraphApiDelegatedClient.SendEmailAsync(messageHtml);
             _emailService.ClearAttachments();
         }
 

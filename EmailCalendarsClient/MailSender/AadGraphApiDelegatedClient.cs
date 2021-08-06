@@ -11,7 +11,7 @@ using GraphEmailClient;
 
 namespace EmailCalendarsClient.MailSender
 {
-    public class AadNativeClient
+    public class AadGraphApiDelegatedClient
     {
         private readonly HttpClient _httpClient = new HttpClient();
         private IPublicClientApplication _app;
@@ -86,7 +86,7 @@ namespace EmailCalendarsClient.MailSender
             }
         }
 
-        public async Task SendEMailAsync(Message message)
+        public async Task SendEmailAsync(Message message)
         {
             var result = await AcquireTokenSilent();
 
