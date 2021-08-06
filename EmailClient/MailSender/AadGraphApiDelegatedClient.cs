@@ -36,26 +36,29 @@ namespace EmailCalendarsClient.MailSender
 
         public async Task<IAccount> SignIn()
         {
-            var accounts = (await _app.GetAccountsAsync()).ToList();
             try
             {
-                var result = await _app.AcquireTokenSilent(Scopes, accounts.FirstOrDefault())
-                    .ExecuteAsync()
-                    .ConfigureAwait(false);
-
+                var result = await AcquireTokenSilent();
                 return result.Account;
             }
             catch (MsalUiRequiredException)
             {
-                var builder = _app.AcquireTokenInteractive(Scopes)
-                    .WithAccount(accounts.FirstOrDefault())
-                    .WithUseEmbeddedWebView(false)
-                    .WithPrompt(Microsoft.Identity.Client.Prompt.SelectAccount);
-
-                var result = await builder.ExecuteAsync().ConfigureAwait(false);
-
-                return result.Account;
+                return await AcquireTokenInteractive().ConfigureAwait(false);
             }
+        }
+
+        private async Task<IAccount> AcquireTokenInteractive()
+        {
+            var accounts = (await _app.GetAccountsAsync()).ToList();
+
+            var builder = _app.AcquireTokenInteractive(Scopes)
+                .WithAccount(accounts.FirstOrDefault())
+                .WithUseEmbeddedWebView(false)
+                .WithPrompt(Microsoft.Identity.Client.Prompt.SelectAccount);
+
+            var result = await builder.ExecuteAsync().ConfigureAwait(false);
+
+            return result.Account;
         }
 
         public async Task<AuthenticationResult> AcquireTokenSilent()
@@ -66,7 +69,7 @@ namespace EmailCalendarsClient.MailSender
                     .ConfigureAwait(false);
 
             return result;
-        }          
+        }
 
         public async Task<IList<IAccount>> GetAccountsAsync()
         {

@@ -2,6 +2,7 @@
 
 ## Setup Azure App registration
 
+
 ## Nuget packages
 
 
@@ -27,6 +28,7 @@ https://converter.telerik.com/
 
 
 ## More information
+
 For more information see MSAL.NET's conceptual documentation:
 - [Quickstart: Register an application with the Microsoft identity platform](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app)
 - [Quickstart: Configure a client application to access web APIs](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-configure-app-access-web-apis)
