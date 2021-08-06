@@ -15,6 +15,12 @@
 </ItemGroup>
 ```
 
+## C# to Visual Basic
+
+I converted the project from C# to Visual Basic using the telerik tool:
+
+https://converter.telerik.com/
+
 ## Links
 
 https://docs.microsoft.com/en-us/graph/outlook-send-mail-from-other-user
@@ -32,9 +38,6 @@ https://docs.microsoft.com/en-us/answers/questions/43724/sending-emails-from-dae
 https://stackoverflow.com/questions/56110910/sending-email-with-microsoft-graph-api-work-account
 
 https://docs.microsoft.com/en-us/graph/sdks/choose-authentication-providers?tabs=CS#InteractiveProvider
-
-https://converter.telerik.com/
-
 
 ## More information
 
