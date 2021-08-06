@@ -61,12 +61,12 @@ namespace EmailCalendarsClient.MailSender
             return message;
         }
 
-        public void AddAttachment(string fileAsString, string filePath)
+        public void AddAttachment(byte[] rawData, string filePath)
         {
             MessageAttachmentsCollectionPage.Add(new FileAttachment
             {
                 Name = Path.GetFileName(filePath),
-                ContentBytes = EncodeTobase64Bytes(fileAsString)
+                ContentBytes = EncodeTobase64Bytes(rawData)
             });
         }
 
@@ -75,10 +75,9 @@ namespace EmailCalendarsClient.MailSender
             MessageAttachmentsCollectionPage.Clear();
         }
 
-        static public byte[] EncodeTobase64Bytes(string toEncode)
+        static public byte[] EncodeTobase64Bytes(byte[] rawData)
         {
-            byte[] toEncodeAsBytes = System.Text.ASCIIEncoding.ASCII.GetBytes(toEncode);
-            string base64String = System.Convert.ToBase64String(toEncodeAsBytes);
+            string base64String = System.Convert.ToBase64String(rawData);
             var returnValue = Convert.FromBase64String(base64String);
             return returnValue;
         }

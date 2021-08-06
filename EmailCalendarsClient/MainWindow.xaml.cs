@@ -93,13 +93,10 @@ namespace GraphEmailClient
             if (dlg.ShowDialog() == true)
             {
                 new FileInfo(dlg.FileName);
-                using (Stream s = dlg.OpenFile())
-                {
-                    TextReader reader = new StreamReader(s);
-                    fileAsString = reader.ReadToEnd();
-                }
 
-                _emailService.AddAttachment(fileAsString, dlg.FileName);
+                byte[] data = File.ReadAllBytes(dlg.FileName);
+
+                _emailService.AddAttachment(data, dlg.FileName);
             }
         }
 
