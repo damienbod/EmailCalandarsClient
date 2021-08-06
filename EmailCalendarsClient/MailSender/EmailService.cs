@@ -5,7 +5,8 @@ namespace EmailCalendarsClient.MailSender
 {
     static class EmailService
     {
-        public static Message CreateStandardEmail(string recipient, string header, string body)
+        public static Message CreateStandardEmail(string recipient, string header,
+            string body, MessageAttachmentsCollectionPage attachments)
         {
             var message = new Message
             {
@@ -24,13 +25,15 @@ namespace EmailCalendarsClient.MailSender
                             Address = recipient
                         }
                     }
-                }
+                },
+                Attachments = attachments
             };
 
             return message;
         }
 
-        public static Message CreateHtmlEmail(string recipient, string header, string body)
+        public static Message CreateHtmlEmail(string recipient, string header, 
+            string body, MessageAttachmentsCollectionPage attachments)
         {
             var message = new Message
             {
@@ -49,7 +52,8 @@ namespace EmailCalendarsClient.MailSender
                             Address = recipient
                         }
                     }
-                }
+                },
+                Attachments = attachments
             };
 
             return message;

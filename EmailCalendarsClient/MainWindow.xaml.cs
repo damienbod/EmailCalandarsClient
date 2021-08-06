@@ -1,5 +1,8 @@
 ﻿using EmailCalendarsClient.MailSender;
+using Microsoft.Graph;
 using Microsoft.Identity.Client;
+using Microsoft.Win32;
+using System;
 using System.IO;
 using System.Net.Http;
 using System.Reflection;
@@ -11,6 +14,7 @@ namespace GraphEmailClient
     public partial class MainWindow : Window
     {
         AadNativeClient _aadNativeClient = new AadNativeClient();
+        MessageAttachmentsCollectionPage _messageAttachmentsCollectionPage = new MessageAttachmentsCollectionPage();
         const string SignInString = "Sign In";
         const string ClearCacheString = "Clear Cache";
 
@@ -87,20 +91,53 @@ namespace GraphEmailClient
         private async void SendEmail(object sender, RoutedEventArgs e)
         {
             var message = EmailService.CreateStandardEmail(EmailRecipientText.Text, 
-                EmailHeader.Text, EmailBody.Text);
+                EmailHeader.Text, EmailBody.Text, _messageAttachmentsCollectionPage);
 
             await _aadNativeClient.SendEMailAsync(message);
+
+            _messageAttachmentsCollectionPage.Clear();
         }
 
         private async void SendHtmlEmail(object sender, RoutedEventArgs e)
         {
             var messageHtml = EmailService.CreateHtmlEmail(EmailRecipientText.Text,
-                EmailHeader.Text, EmailBody.Text);
+                EmailHeader.Text, EmailBody.Text, _messageAttachmentsCollectionPage);
 
             await _aadNativeClient.SendEMailAsync(messageHtml);
+
+            _messageAttachmentsCollectionPage.Clear();
         }
 
-        // Set user name to text box
+        private void AddAttachment(object sender, RoutedEventArgs e)
+        {
+            var dlg = new OpenFileDialog();
+            string fileAsString = string.Empty;
+            if (dlg.ShowDialog() == true)
+            {
+                new FileInfo(dlg.FileName);
+                using (Stream s = dlg.OpenFile())
+                {
+                    TextReader reader = new StreamReader(s);
+                    fileAsString = reader.ReadToEnd();
+                }
+
+                _messageAttachmentsCollectionPage.Add(new FileAttachment
+                { 
+                    Name = dlg.FileName,
+                    ContentBytes = EncodeTobase64Bytes(fileAsString)
+                });
+
+            }
+        }
+
+        static public byte[] EncodeTobase64Bytes(string toEncode)
+        {
+            byte[] toEncodeAsBytes = System.Text.ASCIIEncoding.ASCII.GetBytes(toEncode);
+            string base64String = System.Convert.ToBase64String(toEncodeAsBytes);
+            var returnValue = Convert.FromBase64String(base64String);
+            return returnValue;
+        }
+
         private void SetUserName(IAccount userInfo)
         {
             string userName = null;
