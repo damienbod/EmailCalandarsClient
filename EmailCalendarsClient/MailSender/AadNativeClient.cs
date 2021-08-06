@@ -89,7 +89,7 @@ namespace EmailCalendarsClient.MailSender
             }
         }
 
-        public async Task SendMailAsync()
+        public async Task SendEMailAsync(Message message)
         {
             var result = await AcquireTokenSilent();
 
@@ -102,37 +102,6 @@ namespace EmailCalendarsClient.MailSender
                 {
                     requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", result.AccessToken);
                 })
-            };
-
-
-            var message = new Message
-            {
-                Subject = "Meet for lunch?",
-                Body = new ItemBody
-                {
-                    ContentType = BodyType.Text,
-                    Content = "The new cafeteria is open."
-                },
-                ToRecipients = new List<Recipient>()
-                {
-                    new Recipient
-                    {
-                        EmailAddress = new EmailAddress
-                        {
-                            Address = "damien_bod@hotmail.com"
-                        }
-                    }
-                },
-                CcRecipients = new List<Recipient>()
-                {
-                    new Recipient
-                    {
-                        EmailAddress = new EmailAddress
-                        {
-                            Address = "danas@contoso.onmicrosoft.com"
-                        }
-                    }
-                }
             };
 
             var saveToSentItems = true;
