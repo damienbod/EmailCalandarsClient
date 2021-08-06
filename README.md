@@ -1,8 +1,8 @@
-# AAD Email client
+# Graph API Email client
+
+## Setup Azure App registration
 
 ## Links
-
-https://docs.microsoft.com/en-us/graph/sdks/choose-authentication-providers?tabs=CS#InteractiveProvider
 
 https://docs.microsoft.com/en-us/graph/outlook-send-mail-from-other-user
 
@@ -17,6 +17,8 @@ https://docs.microsoft.com/en-us/graph/api/user-sendmail?view=graph-rest-1.0&tab
 https://docs.microsoft.com/en-us/answers/questions/43724/sending-emails-from-daemon-app-using-graph-api-on.html
 
 https://stackoverflow.com/questions/56110910/sending-email-with-microsoft-graph-api-work-account
+
+https://docs.microsoft.com/en-us/graph/sdks/choose-authentication-providers?tabs=CS#InteractiveProvider
 
 
 ## More information
