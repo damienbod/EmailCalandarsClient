@@ -5,7 +5,7 @@ using System.IO;
 using System.Security.Cryptography;
 using Microsoft.Identity.Client;
 
-namespace TodoListClient
+namespace GraphEmailClient
 {
     static class TokenCacheHelper
     { 

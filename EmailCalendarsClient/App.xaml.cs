@@ -3,7 +3,7 @@
 
 using System.Windows;
 
-namespace TodoListClient
+namespace GraphEmailClient
 {
     /// <summary>
     /// Interaction logic for App.xaml

@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace TodoListClient
+namespace GraphEmailClient
 {
     public partial class MainWindow : Window
     {
@@ -24,13 +24,12 @@ namespace TodoListClient
         {
             var accounts = await _aadNativeClient.GetAccountsAsync();
 
-            // If there is already a token in the cache, clear the cache and update the label on the button.
             if (SignInButton.Content.ToString() == ClearCacheString)
             {
                 await _aadNativeClient.RemoveAccountsAsync();
 
                 SignInButton.Content = SignInString;
-                UserName.Content = Properties.Resources.UserNotSignedIn;
+                UserName.Content = "Not signed in";
                 return;
             }
 
@@ -64,7 +63,7 @@ namespace TodoListClient
 
                 Dispatcher.Invoke(() =>
                 {
-                    UserName.Content = Properties.Resources.UserNotSignedIn;
+                    UserName.Content = "Not signed in";
                 });
             }
         }
@@ -81,7 +80,7 @@ namespace TodoListClient
             }
             else
             {
-                MessageBox.Show($"{httpResponse.ReasonPhrase}\n {failureDescription}", "An error occurred while getting /api/todolist", MessageBoxButton.OK);
+                MessageBox.Show($"{httpResponse.ReasonPhrase}\n {failureDescription}", "An error occurred while sending an email", MessageBoxButton.OK);
             }
         }
 
@@ -105,7 +104,10 @@ namespace TodoListClient
             }
 
             if (userName == null)
-                userName = Properties.Resources.UserNotIdentified;
+            {
+                userName = "Not identified";
+            }
+                
 
             UserName.Content = userName;
         }
