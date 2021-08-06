@@ -89,13 +89,9 @@ namespace GraphEmailClient
         private void AddAttachment(object sender, RoutedEventArgs e)
         {
             var dlg = new OpenFileDialog();
-            string fileAsString = string.Empty;
             if (dlg.ShowDialog() == true)
             {
-                new FileInfo(dlg.FileName);
-
                 byte[] data = File.ReadAllBytes(dlg.FileName);
-
                 _emailService.AddAttachment(data, dlg.FileName);
             }
         }
