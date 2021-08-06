@@ -86,10 +86,17 @@ namespace GraphEmailClient
 
         private async void SendEmail(object sender, RoutedEventArgs e)
         {
-            var message = EmailService.CreateStandardEmail(EmailRecipientText.Text);
-            await _aadNativeClient.SendEMailAsync(message);
+            var message = EmailService.CreateStandardEmail(EmailRecipientText.Text, 
+                EmailHeader.Text, EmailBody.Text);
 
-            var messageHtml = EmailService.CreateHtmlEmail(EmailRecipientText.Text);
+            await _aadNativeClient.SendEMailAsync(message);
+        }
+
+        private async void SendHtmlEmail(object sender, RoutedEventArgs e)
+        {
+            var messageHtml = EmailService.CreateHtmlEmail(EmailRecipientText.Text,
+                EmailHeader.Text, EmailBody.Text);
+
             await _aadNativeClient.SendEMailAsync(messageHtml);
         }
 

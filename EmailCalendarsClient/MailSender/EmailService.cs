@@ -5,15 +5,15 @@ namespace EmailCalendarsClient.MailSender
 {
     static class EmailService
     {
-        public static Message CreateStandardEmail(string recipient)
+        public static Message CreateStandardEmail(string recipient, string header, string body)
         {
             var message = new Message
             {
-                Subject = "Meet for lunch?",
+                Subject = header,
                 Body = new ItemBody
                 {
                     ContentType = BodyType.Text,
-                    Content = "The new cafeteria is open."
+                    Content = body
                 },
                 ToRecipients = new List<Recipient>()
                 {
@@ -30,15 +30,15 @@ namespace EmailCalendarsClient.MailSender
             return message;
         }
 
-        public static Message CreateHtmlEmail(string recipient)
+        public static Message CreateHtmlEmail(string recipient, string header, string body)
         {
             var message = new Message
             {
-                Subject = "Meet for lunch?",
+                Subject = header,
                 Body = new ItemBody
                 {
                     ContentType = BodyType.Html,
-                    Content = "<p>The new <b>cafeteria</b> is open.</p>"
+                    Content = body
                 },
                 ToRecipients = new List<Recipient>()
                 {
