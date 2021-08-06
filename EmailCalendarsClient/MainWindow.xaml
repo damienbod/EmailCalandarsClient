@@ -98,7 +98,7 @@
                             <Style TargetType="{x:Type TextBox}">
                                 <Setter Property="Background" Value="Transparent" />
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Text, ElementName=EmailHeader}" Value="">
+                                    <DataTrigger Binding="{Binding Text, ElementName=EmailBody}" Value="">
                                         <Setter Property="Background" Value="{StaticResource EmailBodyHint}"/>
                                     </DataTrigger>
                                 </Style.Triggers>

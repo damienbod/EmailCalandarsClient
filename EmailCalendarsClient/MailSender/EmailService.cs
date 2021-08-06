@@ -1,12 +1,15 @@
 ﻿using Microsoft.Graph;
+using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace EmailCalendarsClient.MailSender
 {
-    static class EmailService
+    class EmailService
     {
-        public static Message CreateStandardEmail(string recipient, string header,
-            string body, MessageAttachmentsCollectionPage attachments)
+        MessageAttachmentsCollectionPage MessageAttachmentsCollectionPage = new MessageAttachmentsCollectionPage();
+
+        public Message CreateStandardEmail(string recipient, string header, string body)
         {
             var message = new Message
             {
@@ -26,14 +29,13 @@ namespace EmailCalendarsClient.MailSender
                         }
                     }
                 },
-                Attachments = attachments
+                Attachments = MessageAttachmentsCollectionPage
             };
 
             return message;
         }
 
-        public static Message CreateHtmlEmail(string recipient, string header, 
-            string body, MessageAttachmentsCollectionPage attachments)
+        public Message CreateHtmlEmail(string recipient, string header, string body)
         {
             var message = new Message
             {
@@ -53,10 +55,32 @@ namespace EmailCalendarsClient.MailSender
                         }
                     }
                 },
-                Attachments = attachments
+                Attachments = MessageAttachmentsCollectionPage
             };
 
             return message;
+        }
+
+        public void AddAttachment(string fileAsString, string filePath)
+        {
+            MessageAttachmentsCollectionPage.Add(new FileAttachment
+            {
+                Name = Path.GetFileName(filePath),
+                ContentBytes = EncodeTobase64Bytes(fileAsString)
+            });
+        }
+
+        public void ClearAttachments()
+        {
+            MessageAttachmentsCollectionPage.Clear();
+        }
+
+        static public byte[] EncodeTobase64Bytes(string toEncode)
+        {
+            byte[] toEncodeAsBytes = System.Text.ASCIIEncoding.ASCII.GetBytes(toEncode);
+            string base64String = System.Convert.ToBase64String(toEncodeAsBytes);
+            var returnValue = Convert.FromBase64String(base64String);
+            return returnValue;
         }
     }
 }
