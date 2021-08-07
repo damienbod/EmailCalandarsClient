@@ -6,8 +6,6 @@
 
 [Send Emails using Microsoft Graph API and a desktop client](https://damienbod.com/)
 
-Send Emails using Microsoft Graph API and a desktop client
-
 ## Requirements
 
 To send emails using Microsoft Graph API, you need to have an office license for the Azure Active Directory user which sends the email.
