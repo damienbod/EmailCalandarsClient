@@ -4,7 +4,7 @@
 
 ## Requirements
 
-To send emails using Microsoft Graph API, you need to have an office license for the identity which sends the email.
+To send emails using Microsoft Graph API, you need to have an office license for the Azure Active Directory user which sends the email.
 
 You can sign-in here to check this:
 
