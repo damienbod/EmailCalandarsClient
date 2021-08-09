@@ -4,7 +4,7 @@
 
 ## Blogs
 
-[Send Emails using Microsoft Graph API and a desktop client](https://damienbod.com/)
+[Send Emails using Microsoft Graph API and a desktop client](https://damienbod.com/2021/08/09/send-emails-using-microsoft-graph-api-and-a-desktop-client/)
 
 ## Requirements
 
