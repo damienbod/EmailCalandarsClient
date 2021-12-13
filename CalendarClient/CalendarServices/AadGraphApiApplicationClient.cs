@@ -1,5 +1,6 @@
 ﻿using Azure.Identity;
 using Microsoft.Graph;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
 using System.Net.Http;
@@ -56,9 +57,14 @@ namespace CalendarServices.CalendarClient
 
             var userId = await GetUserIdAsync(email);
             var filter = "startsWith(subject,'All')";
+            var queryOptions = new List<QueryOption>()
+            {
+                new QueryOption("startDateTime", "2017-01-01T19:00:00-08:00"),
+                new QueryOption("endDateTime", "2022-10-01T19:00:00.00-08:00")
+            };
 
             var result = await graphServiceClient.Users[userId].Calendar.Events
-                .Request()
+                .Request(queryOptions)
                // .Filter(filter)
                 .GetAsync();
 
