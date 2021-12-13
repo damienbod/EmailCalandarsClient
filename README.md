@@ -8,7 +8,7 @@
 
 ## History
 
-2021-12-13 Updated to .NET 6
+2021-12-13 Updated to .NET 6, added calendar events
 
 ## Requirements
 
