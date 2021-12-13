@@ -72,7 +72,7 @@ namespace CalendarClient
             var message = _emailService.CreateStandardEmail(EmailRecipientText.Text, 
                 EmailHeader.Text, EmailBody.Text);
 
-            await _aadGraphApiApplicationClient.SendEmailAsync(message);
+            await _aadGraphApiApplicationClient.SendEmailAsync(message, "damienbod@damienbodsharepoint.onmicrosoft.com");
             _emailService.ClearAttachments();
         }
 
@@ -81,7 +81,7 @@ namespace CalendarClient
             var messageHtml = _emailService.CreateHtmlEmail(EmailRecipientText.Text,
                 EmailHeader.Text, EmailBody.Text);
 
-            await _aadGraphApiApplicationClient.SendEmailAsync(messageHtml);
+            await _aadGraphApiApplicationClient.SendEmailAsync(messageHtml, "damienbod@damienbodsharepoint.onmicrosoft.com");
             _emailService.ClearAttachments();
         }
 

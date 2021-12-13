@@ -20,10 +20,10 @@ namespace CalendarServices.CalendarClient
         private static readonly string[] Scopes = { Scope };
 
 
-        private async Task<string> GetUserIdAsync()
+        private async Task<string> GetUserIdAsync(string email)
         {
-            var adminUserId = AdminUserId;
-            var filter = $"startswith(userPrincipalName,'{adminUserId}')";
+
+            var filter = $"startswith(userPrincipalName,'{email}')";
             var graphServiceClient = GetGraphClient();
 
             var users = await graphServiceClient.Users
@@ -34,13 +34,13 @@ namespace CalendarServices.CalendarClient
             return users.CurrentPage[0].Id;
         }
 
-        public async Task SendEmailAsync(Message message)
+        public async Task SendEmailAsync(Message message, string senderEmail)
         {
             var graphServiceClient = GetGraphClient();
 
             var saveToSentItems = true;
 
-            var userId = await GetUserIdAsync();
+            var userId = await GetUserIdAsync(senderEmail);
 
             await graphServiceClient.Users[userId]
                 .SendMail(message, saveToSentItems)
@@ -48,40 +48,21 @@ namespace CalendarServices.CalendarClient
                 .PostAsync();
         }
 
-        public async Task<OnlineMeeting> CreateOnlineMeeting(OnlineMeeting onlineMeeting)
+   
+       
+        public async Task<ICalendarEventsCollectionPage> GetCalanderForUser(string email)
         {
             var graphServiceClient = GetGraphClient();
 
-            var userId = await GetUserIdAsync();
+            var userId = await GetUserIdAsync(email);
+            var filter = "startsWith(subject,'All')";
 
-            return await graphServiceClient.Users[userId]
-                .OnlineMeetings
+            var result = await graphServiceClient.Users[userId].Calendar.Events
                 .Request()
-                .AddAsync(onlineMeeting);
-        }
-
-        public async Task<OnlineMeeting> UpdateOnlineMeeting(OnlineMeeting onlineMeeting)
-        {
-            var graphServiceClient = GetGraphClient();
-
-            var userId = await GetUserIdAsync();
-
-            return await graphServiceClient.Users[userId]
-                .OnlineMeetings[onlineMeeting.Id]
-                .Request()
-                .UpdateAsync(onlineMeeting);
-        }
-
-        public async Task<OnlineMeeting> GetOnlineMeeting(string onlineMeetingId)
-        {
-            var graphServiceClient = GetGraphClient();
-
-            var userId = await GetUserIdAsync();
-
-            return await graphServiceClient.Users[userId]
-                .OnlineMeetings[onlineMeetingId]
-                .Request()
+                .Filter(filter)
                 .GetAsync();
+
+            return result;
         }
 
         private GraphServiceClient GetGraphClient()
