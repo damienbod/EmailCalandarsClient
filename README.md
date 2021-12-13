@@ -56,6 +56,12 @@ https://stackoverflow.com/questions/56110910/sending-email-with-microsoft-graph-
 
 https://docs.microsoft.com/en-us/graph/sdks/choose-authentication-providers?tabs=CS#InteractiveProvider
 
+https://docs.microsoft.com/en-us/graph/api/cloudcommunications-getpresencesbyuserid?view=graph-rest-1.0&tabs=csharp
+
+https://docs.microsoft.com/en-us/graph/api/user-get-mailboxsettings?view=graph-rest-1.0&tabs=csharp
+
+https://docs.microsoft.com/en-us/graph/api/user-list-events?view=graph-rest-1.0&tabs=csharp
+
 ## More information
 
 For more information see MSAL.NET's conceptual documentation:
