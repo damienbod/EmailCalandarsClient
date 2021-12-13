@@ -3,11 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace CalendarClient.MailSender
+namespace CalendarServices.CalendarClient
 {
     public class EmailService
     {
-        MessageAttachmentsCollectionPage MessageAttachmentsCollectionPage = new MessageAttachmentsCollectionPage();
+        MessageAttachmentsCollectionPage MessageAttachmentsCollectionPage = new();
 
         public Message CreateStandardEmail(string recipient, string header, string body)
         {

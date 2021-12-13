@@ -96,11 +96,12 @@ namespace EmailCalendarsClient.MailSender
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", result.AccessToken);
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            GraphServiceClient graphClient = new GraphServiceClient(_httpClient)
+            var graphClient = new GraphServiceClient(_httpClient)
             {
                 AuthenticationProvider = new DelegateAuthenticationProvider(async (requestMessage) =>
                 {
                     requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", result.AccessToken);
+                    await Task.FromResult<object>(null);
                 })
             };
 
