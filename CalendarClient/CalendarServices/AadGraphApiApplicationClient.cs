@@ -49,18 +49,16 @@ namespace CalendarServices.CalendarClient
                 .PostAsync();
         }
 
-   
-       
-        public async Task<ICalendarEventsCollectionPage> GetCalanderForUser(string email)
+        public async Task<ICalendarEventsCollectionPage> GetCalanderForUser(string email, string from, string to)
         {
             var graphServiceClient = GetGraphClient();
 
             var userId = await GetUserIdAsync(email);
-            var filter = "startsWith(subject,'All')";
+            // var filter = "startsWith(subject,'All')";
             var queryOptions = new List<QueryOption>()
             {
-                new QueryOption("startDateTime", "2017-01-01T19:00:00-08:00"),
-                new QueryOption("endDateTime", "2022-10-01T19:00:00.00-08:00")
+                new QueryOption("startDateTime", from),
+                new QueryOption("endDateTime", to)
             };
 
             var result = await graphServiceClient.Users[userId].Calendar.Events

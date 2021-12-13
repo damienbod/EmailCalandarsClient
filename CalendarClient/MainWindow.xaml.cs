@@ -14,8 +14,11 @@ namespace CalendarClient
 
         private async void GetCalenderEvents(object sender, RoutedEventArgs e)
         {
-            var email = EmailCalendarText.Text;
-            var data = await _aadGraphApiApplicationClient.GetCalanderForUser(email);
+            var to = FilterToText.Text;
+            var from = FilterFromText.Text;
+
+            var data = await _aadGraphApiApplicationClient
+                .GetCalanderForUser(EmailCalendarText.Text, to, from);
    
             var first = data.CurrentPage[0];
         }
