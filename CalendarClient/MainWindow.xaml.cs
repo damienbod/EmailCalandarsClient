@@ -18,7 +18,7 @@ namespace CalendarClient
             var from = FilterFromText.Text;
 
             var data = await _aadGraphApiApplicationClient
-                .GetCalanderForUser(EmailCalendarText.Text, to, from);
+                .GetCalanderForUser(EmailCalendarText.Text, from, to);
    
             var first = data.CurrentPage[0];
         }
