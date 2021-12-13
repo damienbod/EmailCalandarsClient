@@ -1,8 +1,6 @@
 ﻿using CalendarServices.CalendarClient;
-using Microsoft.Graph;
 using System.Collections.Generic;
 using System.Text.Json;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace CalendarClient
@@ -24,11 +22,10 @@ namespace CalendarClient
             var userCalendarViewCollectionPages = await _aadGraphApiApplicationClient
                 .GetCalanderForUser(EmailCalendarText.Text, from, to);
 
-            List<FilteredEvent> allEvents = new List<FilteredEvent>();
+            var allEvents = new List<FilteredEvent>();
 
             while (userCalendarViewCollectionPages != null && userCalendarViewCollectionPages.Count > 0)
             {
-                //loop thorugh every user page
                 foreach (var calenderEvent in userCalendarViewCollectionPages)
                 {
                     var filteredEvent = new FilteredEvent

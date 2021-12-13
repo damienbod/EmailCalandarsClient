@@ -2,8 +2,6 @@
 using Microsoft.Graph;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Globalization;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace CalendarServices.CalendarClient
@@ -15,11 +13,6 @@ namespace CalendarServices.CalendarClient
         private static readonly string ClientId = ConfigurationManager.AppSettings["ClientId"];
         private static readonly string ClientSecret = ConfigurationManager.AppSettings["ClientSecret"];
         private static readonly string Scope = ConfigurationManager.AppSettings["Scope"];
-        private static readonly string AdminUserId = ConfigurationManager.AppSettings["AdminUserId"];
-
-        private static readonly string Authority = string.Format(CultureInfo.InvariantCulture, AadInstance, Tenant);
-        private static readonly string[] Scopes = { Scope };
-
 
         private async Task<string> GetUserIdAsync(string email)
         {
