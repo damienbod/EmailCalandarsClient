@@ -67,32 +67,14 @@ namespace CalendarClient
             //}
         }
 
-        private async void SendEmail(object sender, RoutedEventArgs e)
+        
+
+        private async void GetCalenderEvents(object sender, RoutedEventArgs e)
         {
-            var message = _emailService.CreateStandardEmail(EmailRecipientText.Text, 
-                EmailHeader.Text, EmailBody.Text);
-
-            await _aadGraphApiApplicationClient.SendEmailAsync(message, "damienbod@damienbodsharepoint.onmicrosoft.com");
-            _emailService.ClearAttachments();
-        }
-
-        private async void SendHtmlEmail(object sender, RoutedEventArgs e)
-        {
-            var messageHtml = _emailService.CreateHtmlEmail(EmailRecipientText.Text,
-                EmailHeader.Text, EmailBody.Text);
-
-            await _aadGraphApiApplicationClient.SendEmailAsync(messageHtml, "damienbod@damienbodsharepoint.onmicrosoft.com");
-            _emailService.ClearAttachments();
-        }
-
-        private void AddAttachment(object sender, RoutedEventArgs e)
-        {
-            var dlg = new OpenFileDialog();
-            if (dlg.ShowDialog() == true)
-            {
-                byte[] data = File.ReadAllBytes(dlg.FileName);
-                _emailService.AddAttachment(data, dlg.FileName);
-            }
+            var email = EmailCalendarText.Text;
+            var data = await _aadGraphApiApplicationClient.GetCalanderForUser(email);
+   
+            var first = data.CurrentPage[0];
         }
 
         private void SetUserName(IAccount userInfo)
