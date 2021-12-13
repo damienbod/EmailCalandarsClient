@@ -49,7 +49,7 @@ namespace CalendarServices.CalendarClient
                 .PostAsync();
         }
 
-        public async Task<ICalendarEventsCollectionPage> GetCalanderForUser(string email, string from, string to)
+        public async Task<IUserCalendarViewCollectionPage> GetCalanderForUser(string email, string from, string to)
         {
             var graphServiceClient = GetGraphClient();
 
@@ -61,9 +61,11 @@ namespace CalendarServices.CalendarClient
                 new QueryOption("endDateTime", to)
             };
 
-            var result = await graphServiceClient.Users[userId].Calendar.Events
+            //var result = await graphServiceClient.Users[userId].Calendar.Events
+            var result = await graphServiceClient.Users[userId].CalendarView
                 .Request(queryOptions)
-               // .Filter(filter)
+                .Select("start,end,subject,location,sensitivity, showAs, isAllDay")
+                // .Filter(filter)
                 .GetAsync();
 
             return result;

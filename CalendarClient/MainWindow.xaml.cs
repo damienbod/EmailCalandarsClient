@@ -1,4 +1,8 @@
 ﻿using CalendarServices.CalendarClient;
+using Microsoft.Graph;
+using System.Collections.Generic;
+using System.Text.Json;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace CalendarClient
@@ -17,10 +21,34 @@ namespace CalendarClient
             var to = FilterToText.Text;
             var from = FilterFromText.Text;
 
-            var data = await _aadGraphApiApplicationClient
+            var userCalendarViewCollectionPages = await _aadGraphApiApplicationClient
                 .GetCalanderForUser(EmailCalendarText.Text, from, to);
-   
-            var first = data.CurrentPage[0];
+
+            List<FilteredEvent> allEvents = new List<FilteredEvent>();
+
+            while (userCalendarViewCollectionPages != null && userCalendarViewCollectionPages.Count > 0)
+            {
+                //loop thorugh every user page
+                foreach (var calenderEvent in userCalendarViewCollectionPages)
+                {
+                    var filteredEvent = new FilteredEvent
+                    {
+                        ShowAs = calenderEvent.ShowAs,
+                        Sensitivity = calenderEvent.Sensitivity,
+                        Start = calenderEvent.Start,
+                        End = calenderEvent.End,   
+                        Subject = calenderEvent.Subject,   
+                        IsAllDay = calenderEvent.IsAllDay,
+                        Location = calenderEvent.Location
+                    };
+                    allEvents.Add(filteredEvent);
+                }
+                //check if next result page is available
+                if (userCalendarViewCollectionPages.NextPageRequest == null)
+                    break;
+            }
+
+            CalendarDataText.Text = JsonSerializer.Serialize(allEvents);
         }
     }
 }

@@ -95,7 +95,7 @@
                         </TextBox.Style>
                     </TextBox>
                     <TextBox Grid.Column="0" HorizontalAlignment="Left" Height="34" FontSize="12" TextWrapping="Wrap" VerticalAlignment="Top" Width="358" 
-                    x:Name="FilterFromText" Margin="10,64,0,0" TabIndex="1" Padding="3" Text="2021-12-13T19:00:00-08:00" Grid.ColumnSpan="2">
+                    x:Name="FilterFromText" Margin="10,64,0,0" TabIndex="1" Padding="3" Text="2021-12-13T12:00:00-01:00" Grid.ColumnSpan="2">
                         <TextBox.Style>
                             <Style TargetType="{x:Type TextBox}">
                                 <Setter Property="Background" Value="Transparent" />
@@ -108,7 +108,7 @@
                         </TextBox.Style>
                     </TextBox>
                     <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="34" FontSize="12" TextWrapping="Wrap" VerticalAlignment="Top" Width="337" 
-                        x:Name="FilterToText" Margin="167,64,0,0" TabIndex="1" Padding="3" Text="2022-10-01T19:00:00.00-08:00" Grid.ColumnSpan="3">
+                        x:Name="FilterToText" Margin="167,64,0,0" TabIndex="1" Padding="3" Text="2022-01-01T10:00:00.00-01:00" Grid.ColumnSpan="3">
                         <TextBox.Style>
                             <Style TargetType="{x:Type TextBox}">
                                 <Setter Property="Background" Value="Transparent" />
