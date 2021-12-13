@@ -40,17 +40,8 @@
             </VisualBrush>
         </Grid.Resources>
         <StackPanel Grid.Row="0" Margin="5,5,5,0" VerticalAlignment="Top" Height="455">
-            <Grid HorizontalAlignment="Left" Width="566">
-                <Label HorizontalAlignment="Left" Content="Not Signed" Margin="0,2,0,2" x:Name="UserName" Width="401" Height="30"/>
-                <Button HorizontalAlignment="Left" Content="Sign In" Margin="406,0,0,0" Click="SignIn" x:Name="SignInButton" Width="136" Height="34">
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <!-- "<Setter Property="IsEnabled" Value="False" /> -->
-                        </Style>
-                    </Button.Style>
-                </Button>
-            </Grid>
-            <GroupBox Margin="0,0,0,0" Header="Recipient Email address" Height="400">
+            <Grid HorizontalAlignment="Left" Width="566"/>
+            <GroupBox Margin="0,0,0,0" Header="Email of calender" Height="400">
 
                 <Grid HorizontalAlignment="Left" Width="736" Height="338" >
                     <Grid.ColumnDefinitions>

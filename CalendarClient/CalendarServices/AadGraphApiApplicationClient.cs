@@ -59,7 +59,7 @@ namespace CalendarServices.CalendarClient
 
             var result = await graphServiceClient.Users[userId].Calendar.Events
                 .Request()
-                .Filter(filter)
+               // .Filter(filter)
                 .GetAsync();
 
             return result;
