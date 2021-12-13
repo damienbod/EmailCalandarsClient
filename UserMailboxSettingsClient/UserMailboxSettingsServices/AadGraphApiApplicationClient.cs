@@ -4,19 +4,16 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Threading.Tasks;
 
-namespace CalendarServices.CalendarClient
+namespace CalendarServices.UserMailboxSettingsClient
 {
     public class AadGraphApiApplicationClient
     {
-        private static readonly string AadInstance = ConfigurationManager.AppSettings["AADInstance"];
         private static readonly string Tenant = ConfigurationManager.AppSettings["Tenant"];
         private static readonly string ClientId = ConfigurationManager.AppSettings["ClientId"];
         private static readonly string ClientSecret = ConfigurationManager.AppSettings["ClientSecret"];
-        private static readonly string Scope = ConfigurationManager.AppSettings["Scope"];
 
         private async Task<string> GetUserIdAsync(string email)
         {
-
             var filter = $"startswith(userPrincipalName,'{email}')";
             var graphServiceClient = GetGraphClient();
 
@@ -28,23 +25,15 @@ namespace CalendarServices.CalendarClient
             return users.CurrentPage[0].Id;
         }
 
-        public async Task<IUserCalendarViewCollectionPage> GetCalanderForUser(string email, string from, string to)
+        public async Task<User> GetUserMailboxSettings(string email)
         {
             var graphServiceClient = GetGraphClient();
 
             var userId = await GetUserIdAsync(email);
-            // var filter = "startsWith(subject,'All')";
-            var queryOptions = new List<QueryOption>()
-            {
-                new QueryOption("startDateTime", from),
-                new QueryOption("endDateTime", to)
-            };
 
-            //var result = await graphServiceClient.Users[userId].Calendar.Events
-            var result = await graphServiceClient.Users[userId].CalendarView
-                .Request(queryOptions)
-                .Select("start,end,subject,location,sensitivity, showAs, isAllDay")
-                // .Filter(filter)
+            var result = await graphServiceClient.Users[userId]
+                .Request()
+                .Select("MailboxSettings")
                 .GetAsync();
 
             return result;

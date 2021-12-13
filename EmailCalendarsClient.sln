@@ -15,6 +15,8 @@ Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "VbEmailClient", "VbEmailCli
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalendarClient", "CalendarClient\CalendarClient.csproj", "{FBE0459D-F178-4F9D-84C6-4E52B6138FC9}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserMailboxSettingsClient", "UserMailboxSettingsClient\UserMailboxSettingsClient.csproj", "{973580D4-7D9B-49E4-A6C4-36F1E11605B7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{FBE0459D-F178-4F9D-84C6-4E52B6138FC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FBE0459D-F178-4F9D-84C6-4E52B6138FC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FBE0459D-F178-4F9D-84C6-4E52B6138FC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{973580D4-7D9B-49E4-A6C4-36F1E11605B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{973580D4-7D9B-49E4-A6C4-36F1E11605B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{973580D4-7D9B-49E4-A6C4-36F1E11605B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{973580D4-7D9B-49E4-A6C4-36F1E11605B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
