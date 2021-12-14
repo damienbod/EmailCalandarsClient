@@ -24,7 +24,7 @@ https://www.office.com
 
 The API permissions require the Graph delegated permissions.
 
-![azureAppRegistration_emailCalendar_01](https://raw.githubusercontent.com/damienbod/EmailCalandarsClient/main/images/azureAppRegistration_emailCalendar_01.png)
+![azureAppRegistration_emailCalendar_01](https://github.com/damienbod/EmailCalandarsClient/blob/main/images/azureAppRegistration_emailCalendar_01.png)
 
 
 ### Email client
