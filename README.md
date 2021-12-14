@@ -22,15 +22,30 @@ https://www.office.com
 
 ## Setup Azure App registration
 
+### Email client
+
 The Azure App registration requires the Graph API delegated **Mail.Send** and the **Mail.ReadWrite** scopes.
+
+### Presence client
+
+The Azure App registration requires the Graph API delegated **User.Read.All**  scope.
+
+### User Mailbox settings client
+
+The Azure App registration requires the Graph API delegated **User.Read.All** **MailboxSettings.Read** scopes.
+
+### Calendar client
+
+The Azure App registration requires the Graph API delegated **User.Read.All** **Calendars.Read** Calendars.ReadWrite** scopes.
+
 
 ## Nuget packages
 
 ```xml
 <ItemGroup>
-	<PackageReference Include="Microsoft.Identity.Client" Version="4.35.1" />
-	<PackageReference Include="Microsoft.Identity.Web.MicrosoftGraphBeta" Version="1.15.2" />
-	<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+	  <PackageReference Include="Microsoft.Identity.Client" Version="4.39.0" />
+	  <PackageReference Include="Microsoft.Graph" Version="4.11.0" />
+	  <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 </ItemGroup>
 ```
 
