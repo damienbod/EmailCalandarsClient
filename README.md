@@ -22,6 +22,11 @@ https://www.office.com
 
 ## Setup Azure App registration
 
+The API permissions require the Graph delegated permissions.
+
+![azureAppRegistration_emailCalendar_01](https://raw.githubusercontent.com/damienbod/EmailCalandarsClient/main/images/azureAppRegistration_emailCalendar_01.png)
+
+
 ### Email client
 
 The Azure App registration requires the Graph API delegated **Mail.Send** and the **Mail.ReadWrite** scopes.
