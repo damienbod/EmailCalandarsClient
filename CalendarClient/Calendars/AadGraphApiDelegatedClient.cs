@@ -89,7 +89,7 @@ namespace EmailCalendarsClient.MailSender
             }
         }
 
-        public async Task SendEmailAsync(Message message)
+        public async Task<IUserCalendarViewCollectionPage> GetCalanderForUser(string email, string from, string to)
         {
             var result = await AcquireTokenSilent();
 
@@ -105,13 +105,36 @@ namespace EmailCalendarsClient.MailSender
                 })
             };
 
-            var saveToSentItems = true;
+            var upn = await GetUserIdAsync(graphClient, email);
 
-            await graphClient.Me
-                .SendMail(message, saveToSentItems)
-                .Request()
-                .PostAsync();
+            // var filter = "startsWith(subject,'All')";
+            var queryOptions = new List<QueryOption>()
+            {
+                new QueryOption("startDateTime", from),
+                new QueryOption("endDateTime", to)
+            };
+
+            //var result = await graphServiceClient.Users[userId].Calendar.Events
+            var calendarView = await graphClient.Users[upn].CalendarView
+                .Request(queryOptions)
+                .Select("start,end,subject,location,sensitivity, showAs, isAllDay")
+                // .Filter(filter)
+                .GetAsync();
+
+            return calendarView;
         }
 
+        private async Task<string> GetUserIdAsync(GraphServiceClient graphServiceClient, string email)
+        {
+
+            var filter = $"startswith(userPrincipalName,'{email}')";
+
+            var users = await graphServiceClient.Users
+                .Request()
+                .Filter(filter)
+                .GetAsync();
+
+            return users.CurrentPage[0].Id;
+        }
     }
 }

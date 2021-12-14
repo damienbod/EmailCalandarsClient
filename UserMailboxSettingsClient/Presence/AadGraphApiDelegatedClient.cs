@@ -9,7 +9,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using GraphEmailClient;
 
-namespace EmailCalendarsClient.MailSender
+namespace PresenceClient.Presence
 {
     public class AadGraphApiDelegatedClient
     {
@@ -89,7 +89,7 @@ namespace EmailCalendarsClient.MailSender
             }
         }
 
-        public async Task SendEmailAsync(Message message)
+        public async Task<User> GetUserMailboxSettings(string email)
         {
             var result = await AcquireTokenSilent();
 
@@ -105,13 +105,29 @@ namespace EmailCalendarsClient.MailSender
                 })
             };
 
-            var saveToSentItems = true;
+            var upn = await GetUserIdAsync(graphClient, email);
 
-            await graphClient.Me
-                .SendMail(message, saveToSentItems)
+
+            var mailbox = await graphClient.Users[upn]
                 .Request()
-                .PostAsync();
+                .Select("MailboxSettings")
+                .GetAsync();
+
+            return mailbox;
         }
 
+
+        private async Task<string> GetUserIdAsync(GraphServiceClient graphServiceClient, string email)
+        {
+
+            var filter = $"startswith(userPrincipalName,'{email}')";
+
+            var users = await graphServiceClient.Users
+                .Request()
+                .Filter(filter)
+                .GetAsync();
+
+            return users.CurrentPage[0].Id;
+        }
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28803.352
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31612.314
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmailClient", "EmailClient\EmailClient.csproj", "{005E6BB1-F422-4366-B548-1BDE150F0073}"
 EndProject
@@ -12,6 +12,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "VbEmailClient", "VbEmailClient\VbEmailClient.vbproj", "{AEFB88E0-DB04-4135-9DCC-613690E447A7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PresenceClient", "PresenceClient\PresenceClient.csproj", "{B561E658-00A8-4C12-A40D-092DC17FC8CA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserMailboxSettingsClient", "UserMailboxSettingsClient\UserMailboxSettingsClient.csproj", "{7BE23275-8685-467C-B4FD-40A9F9DE12C4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calendar2Client", "CalendarClient\CalendarClient.csproj", "{6EBB6F91-941B-4B4F-ABE9-B8C27ED83DB1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +33,18 @@ Global
 		{AEFB88E0-DB04-4135-9DCC-613690E447A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AEFB88E0-DB04-4135-9DCC-613690E447A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEFB88E0-DB04-4135-9DCC-613690E447A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B561E658-00A8-4C12-A40D-092DC17FC8CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B561E658-00A8-4C12-A40D-092DC17FC8CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B561E658-00A8-4C12-A40D-092DC17FC8CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B561E658-00A8-4C12-A40D-092DC17FC8CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BE23275-8685-467C-B4FD-40A9F9DE12C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BE23275-8685-467C-B4FD-40A9F9DE12C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BE23275-8685-467C-B4FD-40A9F9DE12C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BE23275-8685-467C-B4FD-40A9F9DE12C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EBB6F91-941B-4B4F-ABE9-B8C27ED83DB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EBB6F91-941B-4B4F-ABE9-B8C27ED83DB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EBB6F91-941B-4B4F-ABE9-B8C27ED83DB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EBB6F91-941B-4B4F-ABE9-B8C27ED83DB1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
