@@ -3,15 +3,15 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
-    <RootNamespace>VbEmailClient</RootNamespace>
+    <RootNamespace>VBPresenceClient</RootNamespace>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Identity.Client" Version="4.39.0" />
-	<PackageReference Include="Microsoft.Graph" Version="4.11.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Identity.Client" Version="4.39.0" />
+		<PackageReference Include="Microsoft.Graph" Version="4.11.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+	</ItemGroup>
 
   <ItemGroup>
     <Import Include="System.Windows" />

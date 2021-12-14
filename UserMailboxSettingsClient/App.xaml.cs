@@ -3,7 +3,7 @@
 
 using System.Windows;
 
-namespace GraphEmailClient
+namespace UserMailboxSettings
 {
     /// <summary>
     /// Interaction logic for App.xaml

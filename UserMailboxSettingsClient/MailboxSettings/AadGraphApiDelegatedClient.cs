@@ -7,9 +7,8 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using GraphEmailClient;
 
-namespace PresenceClient.Presence
+namespace UserMailboxSettings.MailboxSettings
 {
     public class AadGraphApiDelegatedClient
     {
