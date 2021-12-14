@@ -1,7 +1,7 @@
 ﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        x:Class="GraphEmailClient.MainWindow"
+        x:Class="UserMailboxSettings.MainWindow"
         Title="Graph API Email client" Height="500" Width="800" WindowStartupLocation="CenterScreen">
     <Grid Margin="12">
         <Grid.Resources>

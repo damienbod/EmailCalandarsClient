@@ -1,14 +1,9 @@
 ﻿using Microsoft.Identity.Client;
-using Microsoft.Win32;
-using System;
-using System.IO;
 using System.Windows;
-using PresenceClient.Presence;
 using System.Text.Json;
-using System.Collections.Generic;
-using Microsoft.Graph;
+using UserMailboxSettings.MailboxSettings;
 
-namespace GraphEmailClient
+namespace UserMailboxSettings
 {
     public partial class MainWindow : Window
     {
