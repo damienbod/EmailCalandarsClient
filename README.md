@@ -30,7 +30,7 @@ The Azure App registration requires the Graph API delegated **Mail.Send** and th
   <appSettings>
     <add key="AADInstance" value="https://login.microsoftonline.com/{0}/v2.0"/>
     <add key="Tenant" value="--your-tenant--"/>
-    <add key="ClientId" value="--your-client-id"/>
+    <add key="ClientId" value="--your-client-id--"/>
     <add key="Scope" value="User.read Mail.Send Mail.ReadWrite"/>
   </appSettings>
 ```
@@ -43,7 +43,7 @@ The Azure App registration requires the Graph API delegated **User.Read.All**  s
   <appSettings>
     <add key="AADInstance" value="https://login.microsoftonline.com/{0}/v2.0"/>
     <add key="Tenant" value="--your-tenant--"/>
-    <add key="ClientId" value="--your-client-id"/>
+    <add key="ClientId" value="--your-client-id--"/>
     <add key="Scope" value="User.read User.Read.All"/>
   </appSettings>
 ```
@@ -56,7 +56,7 @@ The Azure App registration requires the Graph API delegated **User.Read.All** **
   <appSettings>
     <add key="AADInstance" value="https://login.microsoftonline.com/{0}/v2.0"/>
     <add key="Tenant" value="--your-tenant--"/>
-    <add key="ClientId" value="--your-client-id"/>
+    <add key="ClientId" value="--your-client-id--"/>
     <add key="Scope" value="User.read User.Read.All MailboxSettings.Read"/>
   </appSettings>
 ```
@@ -69,7 +69,7 @@ The Azure App registration requires the Graph API delegated **User.Read.All** **
   <appSettings>
     <add key="AADInstance" value="https://login.microsoftonline.com/{0}/v2.0"/>
     <add key="Tenant" value="--your-tenant--"/>
-    <add key="ClientId" value="--your-client-id"/>
+    <add key="ClientId" value="--your-client-id--"/>
     <add key="Scope" value="User.read User.Read.All Calendars.Read Calendars.ReadWrite"/>
   </appSettings>
 ```
@@ -78,9 +78,9 @@ The Azure App registration requires the Graph API delegated **User.Read.All** **
 
 ```xml
 <ItemGroup>
-	  <PackageReference Include="Microsoft.Identity.Client" Version="4.39.0" />
-	  <PackageReference Include="Microsoft.Graph" Version="4.11.0" />
-	  <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  <PackageReference Include="Microsoft.Identity.Client" Version="4.39.0" />
+  <PackageReference Include="Microsoft.Graph" Version="4.11.0" />
+  <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 </ItemGroup>
 ```
 
