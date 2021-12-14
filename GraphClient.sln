@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PresenceClient", "PresenceC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserMailboxSettingsClient", "UserMailboxSettingsClient\UserMailboxSettingsClient.csproj", "{7BE23275-8685-467C-B4FD-40A9F9DE12C4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calendar2Client", "CalendarClient\CalendarClient.csproj", "{6EBB6F91-941B-4B4F-ABE9-B8C27ED83DB1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalendarClient", "CalendarClient\CalendarClient.csproj", "{6EBB6F91-941B-4B4F-ABE9-B8C27ED83DB1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
