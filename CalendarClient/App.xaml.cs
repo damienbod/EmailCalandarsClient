@@ -3,7 +3,7 @@
 
 using System.Windows;
 
-namespace CalendarClient
+namespace GraphEmailClient
 {
     /// <summary>
     /// Interaction logic for App.xaml

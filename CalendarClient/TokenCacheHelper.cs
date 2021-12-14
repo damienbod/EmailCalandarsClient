@@ -5,7 +5,7 @@ using System.IO;
 using System.Security.Cryptography;
 using Microsoft.Identity.Client;
 
-namespace CalendarClient
+namespace GraphEmailClient
 {
     static class TokenCacheHelper
     { 
