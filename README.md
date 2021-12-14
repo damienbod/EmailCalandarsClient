@@ -26,18 +26,53 @@ https://www.office.com
 
 The Azure App registration requires the Graph API delegated **Mail.Send** and the **Mail.ReadWrite** scopes.
 
+```xml
+  <appSettings>
+    <add key="AADInstance" value="https://login.microsoftonline.com/{0}/v2.0"/>
+    <add key="Tenant" value="--your-tenant--"/>
+    <add key="ClientId" value="--your-client-id"/>
+    <add key="Scope" value="User.read Mail.Send Mail.ReadWrite"/>
+  </appSettings>
+```
+
 ### Presence client
 
 The Azure App registration requires the Graph API delegated **User.Read.All**  scope.
+
+```xml
+  <appSettings>
+    <add key="AADInstance" value="https://login.microsoftonline.com/{0}/v2.0"/>
+    <add key="Tenant" value="--your-tenant--"/>
+    <add key="ClientId" value="--your-client-id"/>
+    <add key="Scope" value="User.read User.Read.All"/>
+  </appSettings>
+```
 
 ### User Mailbox settings client
 
 The Azure App registration requires the Graph API delegated **User.Read.All** **MailboxSettings.Read** scopes.
 
+```xml
+  <appSettings>
+    <add key="AADInstance" value="https://login.microsoftonline.com/{0}/v2.0"/>
+    <add key="Tenant" value="--your-tenant--"/>
+    <add key="ClientId" value="--your-client-id"/>
+    <add key="Scope" value="User.read User.Read.All MailboxSettings.Read"/>
+  </appSettings>
+```
+
 ### Calendar client
 
 The Azure App registration requires the Graph API delegated **User.Read.All** **Calendars.Read** Calendars.ReadWrite** scopes.
 
+```xml
+  <appSettings>
+    <add key="AADInstance" value="https://login.microsoftonline.com/{0}/v2.0"/>
+    <add key="Tenant" value="--your-tenant--"/>
+    <add key="ClientId" value="--your-client-id"/>
+    <add key="Scope" value="User.read User.Read.All Calendars.Read Calendars.ReadWrite"/>
+  </appSettings>
+```
 
 ## Nuget packages
 
