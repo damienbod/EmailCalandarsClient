@@ -1,6 +1,6 @@
 ﻿Imports Microsoft.Identity.Client
 Imports System.Text.Json
-Imports VBUserMailboxSettingsClient.Calendars
+Imports VBCalendarClient.Calendars
 
 Partial Public Class MainWindow
     Inherits Window
