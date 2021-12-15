@@ -1,4 +1,4 @@
-# Graph API Email client
+# Graph API Email, Presence, MailboxSettings, Calendar client
 
 [![.NET Core Desktop](https://github.com/damienbod/EmailCalandarsClient/actions/workflows/dotnet-desktop.yml/badge.svg)](https://github.com/damienbod/EmailCalandarsClient/actions/workflows/dotnet-desktop.yml)
 
