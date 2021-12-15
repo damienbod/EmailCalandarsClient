@@ -49,7 +49,7 @@ The Azure App registration requires the Graph API delegated **User.Read.All** an
     <add key="AADInstance" value="https://login.microsoftonline.com/{0}/v2.0"/>
     <add key="Tenant" value="--your-tenant--"/>
     <add key="ClientId" value="--your-client-id--"/>
-    <add key="Scope" value="User.read User.Read.All"/>
+    <add key="Scope" value="User.read User.Read.All Presence.Read.All"/>
   </appSettings>
 ```
 
