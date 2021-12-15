@@ -42,7 +42,7 @@ The Azure App registration requires the Graph API delegated **Mail.Send** and th
 
 ### Presence client
 
-The Azure App registration requires the Graph API delegated **User.Read.All**  scope.
+The Azure App registration requires the Graph API delegated **User.Read.All** and **Presence.Read.All** scope.
 
 ```xml
   <appSettings>
@@ -68,14 +68,14 @@ The Azure App registration requires the Graph API delegated **User.Read.All** **
 
 ### Calendar client
 
-The Azure App registration requires the Graph API delegated **User.Read.All** **Calendars.Read** Calendars.ReadWrite** scopes.
+The Azure App registration requires the Graph API delegated **User.Read.All** **Calendars.Read **Calendars.Read.Shared** scopes.
 
 ```xml
   <appSettings>
     <add key="AADInstance" value="https://login.microsoftonline.com/{0}/v2.0"/>
     <add key="Tenant" value="--your-tenant--"/>
     <add key="ClientId" value="--your-client-id--"/>
-    <add key="Scope" value="User.read User.Read.All Calendars.Read Calendars.ReadWrite"/>
+    <add key="Scope" value="User.read User.Read.All Calendars.Read Calendars.Read.Shared"/>
   </appSettings>
 ```
 
